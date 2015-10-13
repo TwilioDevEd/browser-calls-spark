@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.postgresql:postgresql:9.4-1204-jdbc42'
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
+    }
+}
+
+apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'java'
+apply plugin: 'jetty'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.sparkjava:spark-core:2.3'
+    compile 'org.postgresql:postgresql:9.4-1204-jdbc42'
+    compile 'com.twilio.sdk:twilio-java-sdk:5.2.1'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.0'
+    compile 'com.sparkjava:spark-template-mustache:2.3'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
+
+flyway {
+    user = "$System.env.DB_USERNAME"
+    password = "$System.env.DB_PASSWORD"
+    url = "$System.env.DB_URL"
+}
