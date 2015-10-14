@@ -27,5 +27,12 @@ public class App {
      */
     EntityManagerFactory factory = appSetup.getEntityManagerFactory();
 
+    /**
+     * Specifies the directory within resources that will be publicly available when the
+     * application is running. Place static web files in this directory (JS, CSS).
+     */
+    Spark.staticFileLocation("/public");
+
+    get("/hello", (req, res) -> "Hello World");
   }
 }

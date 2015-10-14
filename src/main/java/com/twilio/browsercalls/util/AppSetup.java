@@ -46,12 +46,22 @@ public class AppSetup {
 
   public String getDatabaseURL() throws UndefinedEnvironmentVariableException {
     String url = env.get("DB_URL");
-    return url != null ? url : "";
+    if (url == null) {
+      throw new UndefinedEnvironmentVariableException("DB_URL is not defined");
+    }
+    else {
+      return url;
+    }
   }
 
   public String getDatabaseUsername() throws UndefinedEnvironmentVariableException {
     String username = env.get("DB_USERNAME");
-    return username != null ? username : "";
+    if (username == null) {
+      throw new UndefinedEnvironmentVariableException("DB_USERNAME is not defined");
+    }
+    else {
+      return username;
+    }
   }
 
   public String getDatabasePassword() {
@@ -60,7 +70,13 @@ public class AppSetup {
   }
 
   public String getAccountSid() throws UndefinedEnvironmentVariableException {
-    return env.get("TWILIO_ACCOUNT_SID");
+    String sid = env.get("TWILIO_ACCOUNT_SID");
+    if (sid == null) {
+      throw new UndefinedEnvironmentVariableException("TWILIO_ACCOUNT_SID is not defined");
+    }
+    else {
+      return sid;
+    }
   }
 
   public String getAuthToken() throws UndefinedEnvironmentVariableException{
@@ -69,11 +85,17 @@ public class AppSetup {
       throw new UndefinedEnvironmentVariableException("TWILIO_AUTH_TOKEN is not set");
     }
     else {
-      return env.get("TWILIO_AUTH_TOKEN");
+      return token;
     }
   }
 
   public String getTwilioPhoneNumber() throws UndefinedEnvironmentVariableException {
-    return env.get("TWILIO_PHONE_NUMBER");
+    String phoneNumber = env.get("TWILIO_PHONE_NUMBER");
+    if (phoneNumber == null) {
+      throw new UndefinedEnvironmentVariableException("TWILIO_PHONE_NUMBER is not set");
+    }
+    else{
+      return phoneNumber;
+    }
   }
 }

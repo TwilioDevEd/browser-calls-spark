@@ -10,7 +10,9 @@ buildscript {
 
 apply plugin: 'org.flywaydb.flyway'
 apply plugin: 'java'
-apply plugin: 'jetty'
+apply plugin: 'application'
+
+mainClassName = "com.twilio.browsercalls.App"
 
 repositories {
     mavenCentral()
