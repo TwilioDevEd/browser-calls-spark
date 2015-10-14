@@ -1,9 +1,9 @@
-package com.twilio.browsercalls.util;
+package com.twilio.browsercalls.lib;
+
+import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,6 +96,16 @@ public class AppSetup {
     }
     else{
       return phoneNumber;
+    }
+  }
+
+  public String getApplicationSid() throws UndefinedEnvironmentVariableException {
+    String sid = env.get("TWIML_APPLICATION_SID");
+    if (sid == null) {
+      throw new UndefinedEnvironmentVariableException("TWIML_APPLICATION_SID is not set");
+    }
+    else{
+      return sid;
     }
   }
 }

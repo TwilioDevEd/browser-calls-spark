@@ -1,4 +1,4 @@
-package com.twilio.browsercalls.util;
+package com.twilio.browsercalls.exceptions;
 
 public class UndefinedEnvironmentVariableException extends Exception {
   public UndefinedEnvironmentVariableException(String message) {

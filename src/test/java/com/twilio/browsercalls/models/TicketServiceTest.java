@@ -1,8 +1,6 @@
-package com.twilio.browsercalls;
+package com.twilio.browsercalls.models;
 
-import com.twilio.browsercalls.models.Ticket;
-import com.twilio.browsercalls.models.TicketService;
-import com.twilio.browsercalls.util.AppSetup;
+import com.twilio.browsercalls.lib.AppSetup;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;

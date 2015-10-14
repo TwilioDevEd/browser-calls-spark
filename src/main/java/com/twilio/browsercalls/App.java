@@ -1,8 +1,7 @@
 package com.twilio.browsercalls;
 
-import com.twilio.browsercalls.util.AppSetup;
+import com.twilio.browsercalls.lib.AppSetup;
 import spark.Spark;
-import spark.template.mustache.MustacheTemplateEngine;
 
 import javax.persistence.EntityManagerFactory;
 
