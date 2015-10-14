@@ -24,6 +24,7 @@ dependencies {
     compile 'com.twilio.sdk:twilio-java-sdk:5.2.1'
     compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.0'
     compile 'com.sparkjava:spark-template-mustache:2.3'
+    testCompile 'junit:junit:4.12'
 }
 
 task wrapper(type: Wrapper) {
