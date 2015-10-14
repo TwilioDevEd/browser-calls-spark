@@ -1,7 +1,10 @@
 package com.twilio.browsercalls;
 
+import com.twilio.browsercalls.controllers.HomeController;
+import com.twilio.browsercalls.controllers.TokenController;
 import com.twilio.browsercalls.lib.AppSetup;
 import spark.Spark;
+import spark.template.mustache.MustacheTemplateEngine;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -32,6 +35,7 @@ public class App {
      */
     Spark.staticFileLocation("/public");
 
-    get("/hello", (req, res) -> "Hello World");
+    get("/", new HomeController().index, new MustacheTemplateEngine());
+    post("/token/generate", new TokenController().getToken);
   }
 }
