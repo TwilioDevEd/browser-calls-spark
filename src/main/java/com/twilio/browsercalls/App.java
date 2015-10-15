@@ -1,8 +1,11 @@
 package com.twilio.browsercalls;
 
+import com.twilio.browsercalls.controllers.CallController;
+import com.twilio.browsercalls.controllers.DashboardController;
 import com.twilio.browsercalls.controllers.HomeController;
 import com.twilio.browsercalls.controllers.TokenController;
 import com.twilio.browsercalls.lib.AppSetup;
+import com.twilio.browsercalls.models.TicketService;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
@@ -35,7 +38,11 @@ public class App {
      */
     Spark.staticFileLocation("/public");
 
+    TicketService ticketService = new TicketService(factory.createEntityManager());
+
     get("/", new HomeController().index, new MustacheTemplateEngine());
     post("/token/generate", new TokenController().getToken);
+    get("/dashboard", new DashboardController(ticketService).index, new MustacheTemplateEngine());
+    post("/call/connect", new CallController().connect);
   }
 }
