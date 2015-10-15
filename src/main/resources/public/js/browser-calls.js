@@ -4,18 +4,25 @@
  */
 
 // Store some selectors for elements we'll reuse
-var answerButton = $(".answer-button");
-var callSupportButton = $(".call-support-button");
-var hangUpButton = $(".hangup-button");
-var callCustomerButtons = $(".call-customer-button");
+var callStatus;
+var answerButton;
+var callSupportButton;
+var hangUpButton;
+var callCustomerButtons;
 
 /* Helper function to update the call status bar */
 function updateCallStatus(status) {
-  $("#call-status").text(status);
+  callStatus.text(status);
 }
 
 /* Get a Twilio Client token with an AJAX request */
 $(document).ready(function() {
+  callStatus = $("#call-status");
+  answerButton = $(".answer-button");
+  callSupportButton = $(".call-support-button");
+  hangUpButton = $(".hangup-button");
+  callCustomerButtons = $(".call-customer-button");
+
   $.post("/token/generate", {page: window.location.pathname}, function(data) {
     // Set up the Twilio Client Device with the token
     Twilio.Device.setup(data.token);
