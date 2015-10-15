@@ -2,6 +2,7 @@ package com.twilio.browsercalls;
 
 import com.twilio.browsercalls.controllers.*;
 import com.twilio.browsercalls.lib.AppSetup;
+import com.twilio.browsercalls.lib.DbSeeder;
 import com.twilio.browsercalls.models.TicketService;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
@@ -36,6 +37,12 @@ public class App {
     Spark.staticFileLocation("/public");
 
     TicketService ticketService = new TicketService(factory.createEntityManager());
+
+    /**
+     * Seed the database with example data if no records exist.
+     */
+    DbSeeder seeder = new DbSeeder(ticketService);
+    seeder.seedIfDbEmpty();
 
     get("/", new HomeController().index, new MustacheTemplateEngine());
     post("/token/generate", new TokenController().getToken);
