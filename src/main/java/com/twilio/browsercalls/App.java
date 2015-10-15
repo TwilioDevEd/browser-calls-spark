@@ -1,9 +1,6 @@
 package com.twilio.browsercalls;
 
-import com.twilio.browsercalls.controllers.CallController;
-import com.twilio.browsercalls.controllers.DashboardController;
-import com.twilio.browsercalls.controllers.HomeController;
-import com.twilio.browsercalls.controllers.TokenController;
+import com.twilio.browsercalls.controllers.*;
 import com.twilio.browsercalls.lib.AppSetup;
 import com.twilio.browsercalls.models.TicketService;
 import spark.Spark;
@@ -44,5 +41,6 @@ public class App {
     post("/token/generate", new TokenController().getToken);
     get("/dashboard", new DashboardController(ticketService).index, new MustacheTemplateEngine());
     post("/call/connect", new CallController().connect);
+    post("/ticket/create", new TicketController(ticketService).create, new MustacheTemplateEngine());
   }
 }
