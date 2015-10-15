@@ -21,7 +21,7 @@ If you don't have a Twilio phone number yet, you can purchase a new number in yo
 
 1. Clone the repository and `cd` into it.
 1. The application uses Gradle to manage dependencies. A wrapper is included in the 
-   repository so if you don't have Gradle installed on the system, you can use `./gradlew` to
+   repository so, if you don't have Gradle installed on the system, you can use `./gradlew` to
    execute any gradle task.
 1. The application uses PostgreSQL as the persistence layer. If you
    don't have it already, you should install it. The easiest way is by
@@ -56,6 +56,9 @@ If you don't have a Twilio phone number yet, you can purchase a new number in yo
    ```bash
    $ ./gradlew run
    ```
+   This will run the embedded spark application server that uses port 4567 by default.
+   If you want to run the application using a different port, you must set the environment
+   variable `PORT` to the port number you want to use.
 1. Expose the application to the wider Internet using [ngrok](https://ngrok.com/)
 
    ```bash
@@ -66,7 +69,7 @@ If you don't have a Twilio phone number yet, you can purchase a new number in yo
    this:
 
    ```
-   http://<your-ngrok-subdomain>.ngrok.io/support/call
+   http://<your-ngrok-subdomain>.ngrok.io/call/connect
    ```
 
 ### Dependencies
