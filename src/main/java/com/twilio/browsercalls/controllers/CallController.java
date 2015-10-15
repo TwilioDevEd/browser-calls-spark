@@ -1,10 +1,10 @@
 package com.twilio.browsercalls.controllers;
 
+import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.browsercalls.lib.AppSetup;
-import com.twilio.sdk.verbs.Client;
-import com.twilio.sdk.verbs.Dial;
+import com.twilio.sdk.verbs.*;
 import com.twilio.sdk.verbs.Number;
-import com.twilio.sdk.verbs.TwiMLResponse;
+import spark.Request;
 import spark.Route;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
@@ -20,7 +20,18 @@ public class CallController {
   }
 
   public Route connect = (request, response) -> {
-    String twilioPhoneNumber = appSetup.getTwilioPhoneNumber();
+    response.type("application/xml");
+
+    return getXMLResponse(request);
+  };
+
+  public String getXMLResponse(Request request) {
+    String twilioPhoneNumber = null;
+    try {
+      twilioPhoneNumber = appSetup.getTwilioPhoneNumber();
+    } catch (UndefinedEnvironmentVariableException e) {
+      e.printStackTrace();
+    }
     String phoneNumber = request.queryParams("phoneNumber");
 
     TwiMLResponse twimlResponse = new TwiMLResponse();
@@ -30,15 +41,18 @@ public class CallController {
      * If the phoneNumber parameter is sent on the request, it means you are calling a customer.
      * If not, you will make a call to the support agent
      */
-    if (phoneNumber != null) {
-      dial.append(new Number(phoneNumber));
-      dial.setCallerId(twilioPhoneNumber);
-    } else {
-      dial.append(new Client("support_agent"));
+    try {
+      if (phoneNumber != null) {
+        dial.append(new Number(phoneNumber));
+        dial.setCallerId(twilioPhoneNumber);
+      } else {
+        dial.append(new Client("support_agent"));
+      }
+      twimlResponse.append(dial);
+    } catch (TwiMLException e) {
+      e.printStackTrace();
     }
-    twimlResponse.append(dial);
 
-    response.type("application/xml");
     return twimlResponse.toXML();
-  };
+  }
 }
