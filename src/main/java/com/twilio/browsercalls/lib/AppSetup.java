@@ -7,7 +7,9 @@ import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Class that holds methods to obtain configuration parameters from the environment. */
+/**
+ * Class that holds methods to obtain configuration parameters from the environment.
+ */
 public class AppSetup {
   private Map<String, String> env;
 
@@ -15,8 +17,10 @@ public class AppSetup {
     this.env = System.getenv();
   }
 
-  /** Returns an entity manager factory using the defined environment variables that this class
+  /**
+   * Returns an entity manager factory using the defined environment variables that this class
    * has access to.
+   *
    * @return EntityManagerFactory
    */
   public EntityManagerFactory getEntityManagerFactory() {
@@ -48,8 +52,7 @@ public class AppSetup {
     String url = env.get("DB_URL");
     if (url == null) {
       throw new UndefinedEnvironmentVariableException("DB_URL is not defined");
-    }
-    else {
+    } else {
       return url;
     }
   }
@@ -58,8 +61,7 @@ public class AppSetup {
     String username = env.get("DB_USERNAME");
     if (username == null) {
       throw new UndefinedEnvironmentVariableException("DB_USERNAME is not defined");
-    }
-    else {
+    } else {
       return username;
     }
   }
@@ -73,18 +75,16 @@ public class AppSetup {
     String sid = env.get("TWILIO_ACCOUNT_SID");
     if (sid == null) {
       throw new UndefinedEnvironmentVariableException("TWILIO_ACCOUNT_SID is not defined");
-    }
-    else {
+    } else {
       return sid;
     }
   }
 
-  public String getAuthToken() throws UndefinedEnvironmentVariableException{
+  public String getAuthToken() throws UndefinedEnvironmentVariableException {
     String token = env.get("TWILIO_AUTH_TOKEN");
     if (token == null) {
       throw new UndefinedEnvironmentVariableException("TWILIO_AUTH_TOKEN is not set");
-    }
-    else {
+    } else {
       return token;
     }
   }
@@ -93,8 +93,7 @@ public class AppSetup {
     String phoneNumber = env.get("TWILIO_PHONE_NUMBER");
     if (phoneNumber == null) {
       throw new UndefinedEnvironmentVariableException("TWILIO_PHONE_NUMBER is not set");
-    }
-    else{
+    } else {
       return phoneNumber;
     }
   }
@@ -103,8 +102,7 @@ public class AppSetup {
     String sid = env.get("TWIML_APPLICATION_SID");
     if (sid == null) {
       throw new UndefinedEnvironmentVariableException("TWIML_APPLICATION_SID is not set");
-    }
-    else{
+    } else {
       return sid;
     }
   }

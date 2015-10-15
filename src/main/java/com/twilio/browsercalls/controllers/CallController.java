@@ -26,11 +26,14 @@ public class CallController {
     TwiMLResponse twimlResponse = new TwiMLResponse();
     Dial dial = new Dial();
 
+    /**
+     * If the phoneNumber parameter is sent on the request, it means you are calling a customer.
+     * If not, you will make a call to the support agent
+     */
     if (phoneNumber != null) {
       dial.append(new Number(phoneNumber));
       dial.setCallerId(twilioPhoneNumber);
-    }
-    else {
+    } else {
       dial.append(new Client("support_agent"));
     }
     twimlResponse.append(dial);

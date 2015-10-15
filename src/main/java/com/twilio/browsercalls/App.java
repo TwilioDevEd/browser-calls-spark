@@ -48,6 +48,7 @@ public class App {
     post("/token/generate", new TokenController().getToken);
     get("/dashboard", new DashboardController(ticketService).index, new MustacheTemplateEngine());
     post("/call/connect", new CallController().connect);
-    post("/ticket/create", new TicketController(ticketService).create, new MustacheTemplateEngine());
+    post("/ticket/create", new TicketController(ticketService).create,
+        new MustacheTemplateEngine());
   }
 }

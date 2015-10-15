@@ -5,7 +5,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
-/** Class that provides an abstraction to a Ticket's entity database access */
+/**
+ * Class that provides an abstraction to a Ticket's entity database access
+ */
 public class TicketService {
   private EntityManager entityManager;
 

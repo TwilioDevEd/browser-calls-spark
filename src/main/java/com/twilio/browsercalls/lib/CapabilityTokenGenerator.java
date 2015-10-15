@@ -4,10 +4,13 @@ import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.sdk.CapabilityToken;
 import com.twilio.sdk.client.TwilioCapability;
 
+/**
+ * Class that generates a Twilio capability token based on the page that is requesting it.
+ */
 public class CapabilityTokenGenerator {
+  private TwilioCapability capability;
+  private AppSetup appSetup;
   private String role;
-  TwilioCapability capability;
-  AppSetup appSetup;
 
   public CapabilityTokenGenerator(String role) {
     this.role = role;
@@ -32,6 +35,10 @@ public class CapabilityTokenGenerator {
   public String generate() {
     String token = null;
     try {
+      /**
+       * Sets the role depending on the page that requests que token.
+       * If the token is requested from the /dashboard page, the role will be support_agent.
+       */
       capability.allowClientIncoming(role);
       capability.allowClientOutgoing(appSetup.getApplicationSid());
       token = capability.generateToken();

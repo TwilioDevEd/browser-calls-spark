@@ -10,37 +10,46 @@
 <div class="jumbotron bicycle-polo-background">
     <div class="container bicycle-polo-text">
         <h1 class="text-center"><strong>Birchwood Bicycle Polo Co.</strong></h1>
+
         <p>
-            We sell only the finest bicycle polo supplies for those seeking fame and glory in this <a href="https://www.youtube.com/watch?v=DaK9Zj3QHDY" target="_blank">sport of kings</a>.
+            We sell only the finest bicycle polo supplies for those seeking fame and glory in this
+            <a href="https://www.youtube.com/watch?v=DaK9Zj3QHDY" target="_blank">sport of kings</a>.
         </p>
 
         <h3><strong>Having trouble with one of our products?</strong></h3>
+
         <p>
-            Talk to one of our support agents now — or fill out the support form below and someone will call you later.
+            Talk to one of our support agents now — or fill out the support form below and someone
+            will call you later.
         </p>
-        <p><a class="btn btn-primary btn-lg btn-block" href="#support" role="button">Get help</a></p>
+
+        <p><a class="btn btn-primary btn-lg btn-block" href="#support" role="button">Get help</a>
+        </p>
     </div>
 </div>
 
 <div class="container">
     {{#error}}
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{#errors}}
-        <li>{{.}}</li>
-        {{/errors}}
-    </div>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{#errors}}
+                <li>{{.}}</li>
+            {{/errors}}
+        </div>
     {{/error}}
     {{#message}}
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{notice}}
-    </div>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{notice}}
+        </div>
     {{/message}}
     <h2 id="support">Contact support</h2>
 
     <p class="lead">
-        Talk with one of our support agents right now by clicking the "Call Support" button on the right. If you can't talk now, fill out a support ticket and an agent will call you later.
+        Talk with one of our support agents right now by clicking the "Call Support" button on the
+        right. If you can't talk now, fill out a support ticket and an agent will call you later.
     </p>
 
     <div class="row">
@@ -53,17 +62,24 @@
                 </div>
                 <div class="panel-body">
                     <p id="support-unavailable">
-                        None of our support agents are online. (To log in as a support agent, <a href="/dashboard" target="_blank">click here</a>)
+                        None of our support agents are online. (To log in as a support agent, <a
+                            href="/dashboard" target="_blank">click here</a>)
                     </p>
+
                     <p><strong>Status</strong></p>
+
                     <div class="well well-sm" id="call-status">
                         Connecting to Twilio...
                     </div>
 
-                    <button class="btn btn-lg btn-primary call-support-button" onclick="callSupport()">
-                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Call support
+                    <button class="btn btn-lg btn-primary call-support-button"
+                            onclick="callSupport()">
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Call
+                        support
                     </button>
-                    <button class="btn btn-lg btn-danger hangup-button" disabled onclick="hangUp()">Hang up</button>
+                    <button class="btn btn-lg btn-danger hangup-button" disabled onclick="hangUp()">
+                        Hang up
+                    </button>
                 </div>
             </div>
 
@@ -84,14 +100,16 @@
                     <input class="form-control" type="text" name="description" id="description">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit ticket</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit ticket
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
     <small class="pull-right">
-        Header photo courtesy <a href="https://www.flickr.com/photos/tink20seven/4654348885/">David Sachs via Flickr</a>
+        Header photo courtesy <a href="https://www.flickr.com/photos/tink20seven/4654348885/">David
+        Sachs via Flickr</a>
     </small>
 </div>
 {{/content}}

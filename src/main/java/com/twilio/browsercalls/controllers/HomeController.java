@@ -1,6 +1,5 @@
 package com.twilio.browsercalls.controllers;
 
-import com.twilio.browsercalls.models.TicketService;
 import spark.ModelAndView;
 import spark.TemplateViewRoute;
 

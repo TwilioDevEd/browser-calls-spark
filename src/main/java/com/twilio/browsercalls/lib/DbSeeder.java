@@ -5,6 +5,10 @@ import com.twilio.browsercalls.models.TicketService;
 
 import java.util.Date;
 
+/**
+ * Seeder class called upon application start to fill the database
+ * with example data if it's empty.
+ */
 public class DbSeeder {
   private TicketService ticketService;
 

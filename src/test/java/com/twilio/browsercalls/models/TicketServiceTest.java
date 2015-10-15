@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +46,7 @@ public class TicketServiceTest {
   public void testCreate() {
     assertThat(service.count(), is(0L));
 
-    Ticket ticket =
-        new Ticket("Awesome name", "+593999012345", "Test description", new Date());
+    Ticket ticket = new Ticket("Awesome name", "+593999012345", "Test description", new Date());
     service.create(ticket);
 
     assertThat(service.count(), is(1L));
@@ -56,12 +54,10 @@ public class TicketServiceTest {
 
   @Test
   public void testDeleteAll() {
-    Ticket ticket =
-        new Ticket("Awesome name", "+593999012345", "Test description", new Date());
+    Ticket ticket = new Ticket("Awesome name", "+593999012345", "Test description", new Date());
     service.create(ticket);
 
-    Ticket ticket2 =
-        new Ticket("Awesome name", "+593999012345", "Test description", new Date());
+    Ticket ticket2 = new Ticket("Awesome name", "+593999012345", "Test description", new Date());
     service.create(ticket2);
 
     assertThat(service.count(), is(2L));
@@ -73,12 +69,10 @@ public class TicketServiceTest {
 
   @Test
   public void testFindAll() {
-    Ticket ticket =
-        new Ticket("Awesome name", "+593999012345", "Test description", new Date());
+    Ticket ticket = new Ticket("Awesome name", "+593999012345", "Test description", new Date());
     service.create(ticket);
 
-    Ticket ticket2 =
-        new Ticket("Awesome name", "+593999012345", "Test description", new Date());
+    Ticket ticket2 = new Ticket("Awesome name", "+593999012345", "Test description", new Date());
     service.create(ticket2);
 
     List<Ticket> result = service.findAll();
@@ -88,8 +82,7 @@ public class TicketServiceTest {
 
   @Test
   public void testCount() {
-    Ticket ticket =
-        new Ticket("Awesome name", "+593999012345", "Test description", new Date());
+    Ticket ticket = new Ticket("Awesome name", "+593999012345", "Test description", new Date());
     service.create(ticket);
 
     assertThat(service.count(), is(1L));

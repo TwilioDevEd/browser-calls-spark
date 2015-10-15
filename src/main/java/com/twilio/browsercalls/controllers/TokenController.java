@@ -6,6 +6,10 @@ import spark.Route;
 
 public class TokenController {
   public Route getToken = (request, response) -> {
+    /**
+     * Generates a token with specific capabilities depending on the page that is requesting
+     * the page.
+     */
     String page = request.queryParams("page");
     String role = page.equals("/dashboard") ? "support_agent" : "customer";
     CapabilityTokenGenerator generator = new CapabilityTokenGenerator(role);
