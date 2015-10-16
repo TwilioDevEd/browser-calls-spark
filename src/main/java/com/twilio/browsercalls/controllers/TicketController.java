@@ -4,6 +4,7 @@ import com.twilio.browsercalls.lib.FieldValidator;
 import com.twilio.browsercalls.models.Ticket;
 import com.twilio.browsercalls.models.TicketService;
 import spark.ModelAndView;
+import spark.Request;
 import spark.TemplateViewRoute;
 
 import java.util.Date;
@@ -18,6 +19,10 @@ public class TicketController {
   }
 
   public TemplateViewRoute create = (request, response) -> {
+    return new ModelAndView(createTicket(request), "home.mustache");
+  };
+
+  public Map createTicket(Request request) {
     FieldValidator validator =
         new FieldValidator(new String[] {"name", "phone_number", "description"});
 
@@ -35,11 +40,11 @@ public class TicketController {
       map.put("message", true);
       map.put("notice", "Ticket created successfully");
 
-      return new ModelAndView(map, "home.mustache");
+      return map;
     } else {
       map.put("error", true);
       map.put("errors", validator.errors());
-      return new ModelAndView(map, "home.mustache");
+      return map;
     }
-  };
+  }
 }
