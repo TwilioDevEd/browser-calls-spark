@@ -99,9 +99,9 @@ public class AppSetup {
   }
 
   public String getApplicationSid() throws UndefinedEnvironmentVariableException {
-    String sid = env.get("TWIML_APPLICATION_SID");
+    String sid = env.get("TWILIO_APPLICATION_SID");
     if (sid == null) {
-      throw new UndefinedEnvironmentVariableException("TWIML_APPLICATION_SID is not set");
+      throw new UndefinedEnvironmentVariableException("TWILIO_APPLICATION_SID is not set");
     } else {
       return sid;
     }
