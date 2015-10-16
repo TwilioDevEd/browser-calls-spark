@@ -8,11 +8,11 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class FieldValidatorTest {
+public class FieldsValidatorTest {
   @Test
   public void testValid() {
     Request mockRequest = mock(Request.class);
-    FieldValidator validator = new FieldValidator(new String[] {"Existing field", "Missing field"});
+    FieldsValidator validator = new FieldsValidator(new String[] {"Existing field", "Missing field"});
 
     when(mockRequest.queryParams("Existing field")).thenReturn("Existing value");
     when(mockRequest.queryParams("Missing field")).thenReturn("");
@@ -23,7 +23,7 @@ public class FieldValidatorTest {
   @Test
   public void testErrors() {
     Request mockRequest = mock(Request.class);
-    FieldValidator validator = new FieldValidator(new String[] {"Existing field", "Missing field"});
+    FieldsValidator validator = new FieldsValidator(new String[] {"Existing field", "Missing field"});
 
     when(mockRequest.queryParams("Existing field")).thenReturn("Existing value");
     when(mockRequest.queryParams("Missing field")).thenReturn("");

@@ -1,6 +1,6 @@
 package com.twilio.browsercalls.controllers;
 
-import com.twilio.browsercalls.lib.FieldValidator;
+import com.twilio.browsercalls.lib.FieldsValidator;
 import com.twilio.browsercalls.models.Ticket;
 import com.twilio.browsercalls.models.TicketService;
 import spark.ModelAndView;
@@ -23,8 +23,8 @@ public class TicketController {
   };
 
   public Map createTicket(Request request) {
-    FieldValidator validator =
-        new FieldValidator(new String[] {"name", "phone_number", "description"});
+    FieldsValidator validator =
+        new FieldsValidator(new String[] {"name", "phone_number", "description"});
 
     Map map = new HashMap();
 

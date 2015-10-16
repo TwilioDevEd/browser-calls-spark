@@ -12,11 +12,11 @@ import java.util.stream.Stream;
  * Implementation of a simple for validation that simply validates that a request holds all
  * necessary parameters.
  */
-public class FieldValidator {
+public class FieldsValidator {
   private List<String> fields;
   private List<String> errors;
 
-  public FieldValidator(String[] fields) {
+  public FieldsValidator(String[] fields) {
     this.fields = Arrays.asList(fields);
   }
 
@@ -28,22 +28,14 @@ public class FieldValidator {
         return "";
       }
     });
-    List<String> mappedValues = validations.collect(Collectors.toList());
-    List<String> messages = new ArrayList<>();
 
-    for (String value : mappedValues) {
-      if (!value.equals("")) {
-        messages.add(value);
-      }
-    }
+    List<String> messages = validations
+        .filter(value -> !value.equals(""))
+        .collect(Collectors.toList());
 
     this.errors = messages;
 
-    if (messages.size() > 0) {
-      return false;
-    } else {
-      return true;
-    }
+    return messages.isEmpty();
   }
 
   public List<String> errors() {
