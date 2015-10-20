@@ -43,7 +43,7 @@ If you don't have a Twilio phone number yet, you can purchase a new number in yo
    your
    [Twilio Account Settings](https://www.twilio.com/user/account/settings). Set
    `TWILIO_APPLICATION_SID` to the app SID you created
-   before. `TWILIO_NUMBER` should be set to the phone number you
+   before. `TWILIO_PHONE_NUMBER` should be set to the phone number you
    purchased above.
 
 1. Run the migrations:
