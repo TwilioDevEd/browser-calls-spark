@@ -1,5 +1,6 @@
 .DS_Store
 .idea/
 .gradle/
+.env
 build/
 browser-calls-spark.iml
