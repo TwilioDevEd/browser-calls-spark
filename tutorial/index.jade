@@ -93,8 +93,8 @@
 
       We use the [twilio-java](//www.twilio.com/docs/java/install)
       helper library to generate and configure our capability tokens. To allow
-      our support agents to call the phone numbers on our tickets, we use the
-      `allowClientOutgoing()` method.
+      our support agents to call the phone numbers on our tickets, we use an
+      `OutgoingClientScope`.
 
       That method requires an identifier for a
       [TwiML Application](//www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app).

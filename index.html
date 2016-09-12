@@ -73,8 +73,8 @@ Client call to the phone number passed as its sole parameter.</p>
 need to provide them with a capability token.</p>
 <p>We use the <a href="//www.twilio.com/docs/java/install">twilio-java</a>
 helper library to generate and configure our capability tokens. To allow
-our support agents to call the phone numbers on our tickets, we use the
-<code>allowClientOutgoing()</code> method.</p>
+our support agents to call the phone numbers on our tickets, we use an
+<code>OutgoingClientScope</code>.</p>
 <p>That method requires an identifier for a
 <a href="//www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app">TwiML Application</a>.
 Twilio will send a POST request to our backend every time a user makes a
