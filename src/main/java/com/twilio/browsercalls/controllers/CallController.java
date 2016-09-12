@@ -2,14 +2,20 @@ package com.twilio.browsercalls.controllers;
 
 import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.browsercalls.lib.AppSetup;
-import com.twilio.sdk.verbs.*;
-import com.twilio.sdk.verbs.Number;
+import com.twilio.twiml.*;
+import com.twilio.twiml.Number;
+
 import spark.Request;
 import spark.Route;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class CallController {
   AppSetup appSetup;
+  public Route connect = (request, response) -> {
+    response.type("application/xml");
+
+    return getXMLResponse(request);
+  };
 
   public CallController() {
     this.appSetup = new AppSetup();
@@ -19,40 +25,36 @@ public class CallController {
     this.appSetup = appSetup;
   }
 
-  public Route connect = (request, response) -> {
-    response.type("application/xml");
-
-    return getXMLResponse(request);
-  };
-
   public String getXMLResponse(Request request) {
     String twilioPhoneNumber = null;
     try {
       twilioPhoneNumber = appSetup.getTwilioPhoneNumber();
     } catch (UndefinedEnvironmentVariableException e) {
-      e.printStackTrace();
+      return e.getLocalizedMessage();
     }
     String phoneNumber = request.queryParams("phoneNumber");
 
-    TwiMLResponse twimlResponse = new TwiMLResponse();
-    Dial dial = new Dial();
+    Dial.Builder dialBuilder = new Dial.Builder();
 
     /**
-     * If the phoneNumber parameter is sent on the request, it means you are calling a customer.
-     * If not, you will make a call to the support agent
+     * If the phoneNumber parameter is sent on the request, it means you are calling a customer. If
+     * not, you will make a call to the support agent
      */
-    try {
-      if (phoneNumber != null) {
-        dial.append(new Number(phoneNumber));
-        dial.setCallerId(twilioPhoneNumber);
-      } else {
-        dial.append(new Client("support_agent"));
-      }
-      twimlResponse.append(dial);
-    } catch (TwiMLException e) {
-      e.printStackTrace();
+    if (phoneNumber != null) {
+      Number number = new Number.Builder(phoneNumber).build();
+      dialBuilder = dialBuilder.number(number).callerId(twilioPhoneNumber);
+    } else {
+      Client client = new Client.Builder("support_agent").build();
+      dialBuilder = dialBuilder.client(client);
     }
 
-    return twimlResponse.toXML();
+    Dial dial = dialBuilder.build();
+    VoiceResponse twimlResponse = new VoiceResponse.Builder().dial(dial).build();
+
+    try {
+      return twimlResponse.toXml();
+    } catch (TwiMLException e) {
+      return e.getLocalizedMessage();
+    }
   }
 }

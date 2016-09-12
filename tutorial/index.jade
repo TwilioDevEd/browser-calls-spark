@@ -1,5 +1,5 @@
 .chapter(data-title='Browser Calls with Twilio and Spark')
-  .step(data-file='browsercalls/controllers/TokenController.java')
+  .step(data-file='src/main/java/com/twilio/browsercalls/controllers/TokenController.java')
     :markdown
       ## What does this thing do?
 
@@ -40,7 +40,7 @@
       * [Spark Documentation](//sparkjava.com/documentation.html)
       * [Spark Tutorial](//sparktutorials.github.io/)
 
-  .step(data-file='browsercalls/controllers/TicketController.java',
+  .step(data-file='src/main/java/com/twilio/browsercalls/controllers/TicketController.java',
     data-highlight='21-49')
     :markdown
       ## Submit a support ticket
@@ -57,7 +57,7 @@
       * [Mustache Template Engine](//mustache.github.io/)
       * [Spark Routes](http://sparkjava.com/documentation.html#routes)
 
-  .step(data-file='browsercalls/models/Ticket.java')
+  .step(data-file='src/main/java/com/twilio/browsercalls/models/Ticket.java')
     :markdown
       ## The Support Ticket Model
 
@@ -83,8 +83,8 @@
       function we wrote named `callCustomer()`. That function kicks off a Twilio
       Client call to the phone number passed as its sole parameter.
 
-  .step(data-file='browsercalls/lib/CapabilityTokenGenerator.java',
-    data-highlight='15-27, 35-51')
+  .step(data-file='src/main/java/com/twilio/browsercalls/lib/CapabilityTokenGenerator.java',
+    data-highlight='27-60')
     :markdown
       ## Generate a capability token
 
@@ -150,7 +150,7 @@
 
       * [Twilio.Device.connect()](//www.twilio.com/docs/client/device#connect)
 
-  .step(data-file='browsercalls/controllers/CallController.java', data-highlight='28-57')
+  .step(data-file='src/main/java/com/twilio/browsercalls/controllers/CallController.java', data-highlight='28-59')
     :markdown
       ## Connect the call to a phone number
 
@@ -211,13 +211,13 @@
 
       * [Twilio.Device.connect()](//www.twilio.com/docs/client/device#connect)
 
-  .step(data-file='browsercalls/controllers/TokenController.java',
+  .step(data-file='src/main/java/com/twilio/browsercalls/controllers/TokenController.java',
     data-highlight='15-29')
     :markdown
       ## Connect the call to the support agent's client
 
-      To allow our support agents to accept incoming calls we use the
-      `allowClientIncoming()` method when generating their capability token,
+      To allow our support agents to accept incoming calls we use an
+      `IncomingClientScope` when generating their capability token,
       passing `support_agent` as the client's name.
 
       When Twilio sends a POST request to our `/call/connect` endpoint, we can connect the
@@ -317,6 +317,8 @@
 
       Alert all administrators via SMS when a server outage occurs.
 
-      Thanks for checking out this tutorial! If you have any feedback to share
-      with us, we'd love to hear it. Tweet [@twilio](//twitter.com/twilio)
-      to let us know what you think.
+      **Did this help?**
+
+      Thanks for checking out this tutorial! If you have any feedback
+      to share with us, we'd love to hear it.
+      [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.

@@ -1,52 +1,61 @@
 package com.twilio.browsercalls.lib;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
-import com.twilio.sdk.CapabilityToken;
-import com.twilio.sdk.client.TwilioCapability;
+import com.twilio.jwt.client.ClientCapability;
+import com.twilio.jwt.client.IncomingClientScope;
+import com.twilio.jwt.client.OutgoingClientScope;
+import com.twilio.jwt.client.Scope;
 
 /**
  * Class that generates a Twilio capability token based on the page that is requesting it.
  */
 public class CapabilityTokenGenerator {
-  private TwilioCapability capability;
+  private ClientCapability.Builder capabilityBuilder;
   private AppSetup appSetup;
   private String role;
+
+  public CapabilityTokenGenerator(String role, ClientCapability.Builder capabilityBuilder,
+      AppSetup setup) {
+    this.role = role;
+    appSetup = setup;
+    this.capabilityBuilder = capabilityBuilder;
+  }
 
   public CapabilityTokenGenerator(String role) {
     this.role = role;
     appSetup = new AppSetup();
     try {
       /**
-       * To find TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN visit
-       * https://www.twilio.com/user/account
+       * To find TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN visit https://www.twilio.com/console
        */
-      this.capability = new TwilioCapability(appSetup.getAccountSid(), appSetup.getAuthToken());
+      this.capabilityBuilder =
+          new ClientCapability.Builder(appSetup.getAccountSid(), appSetup.getAuthToken());
     } catch (UndefinedEnvironmentVariableException e) {
-      e.printStackTrace();
+      e.getLocalizedMessage();
     }
-  }
-
-  public CapabilityTokenGenerator(String role, TwilioCapability capability, AppSetup setup) {
-    this.role = role;
-    appSetup = setup;
-    this.capability = capability;
   }
 
   public String generate() {
-    String token = null;
+    /**
+     * Sets the role depending on the page that requests que token. If the token is requested from
+     * the /dashboard page, the role will be support_agent.
+     */
+    String appSid = null;
     try {
-      /**
-       * Sets the role depending on the page that requests que token.
-       * If the token is requested from the /dashboard page, the role will be support_agent.
-       */
-      capability.allowClientIncoming(role);
-      capability.allowClientOutgoing(appSetup.getApplicationSid());
-      token = capability.generateToken();
-    } catch (CapabilityToken.DomainException e) {
-      e.printStackTrace();
+      appSid = appSetup.getApplicationSid();
     } catch (UndefinedEnvironmentVariableException e) {
-      e.printStackTrace();
+      System.out.println(e.getLocalizedMessage());
     }
+    OutgoingClientScope outgoingScope = new OutgoingClientScope.Builder(appSid).build();
+    IncomingClientScope incomingScope = new IncomingClientScope(role);
+
+    List<Scope> scopes = Lists.newArrayList(outgoingScope, incomingScope);
+
+    String token = capabilityBuilder.scopes(scopes).build().toJwt();
+
     return token;
   }
 }
