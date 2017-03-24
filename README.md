@@ -47,10 +47,16 @@ If you don't have a Twilio phone number yet, you can purchase a new number in yo
 
    You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` under
    your
-   [Twilio Account Settings](https://www.twilio.com/user/account/settings). Set
+   [Twilio Console](https://www.twilio.com/Console). Set
    `TWILIO_APPLICATION_SID` to the app SID you created
    before. `TWILIO_PHONE_NUMBER` should be set to the phone number you
    purchased above.
+   
+   Once you have populated all the values, load the variables with `source`.
+   
+    ```bash
+    $ source .env
+    ```
 
 1. Run the migrations:
 
