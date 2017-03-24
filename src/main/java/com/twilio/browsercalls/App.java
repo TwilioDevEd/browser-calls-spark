@@ -3,6 +3,7 @@ package com.twilio.browsercalls;
 import com.twilio.browsercalls.controllers.*;
 import com.twilio.browsercalls.lib.AppSetup;
 import com.twilio.browsercalls.lib.DbSeeder;
+import com.twilio.browsercalls.logging.LoggingFilter;
 import com.twilio.browsercalls.models.TicketService;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
@@ -10,6 +11,7 @@ import spark.template.mustache.MustacheTemplateEngine;
 import javax.persistence.EntityManagerFactory;
 
 import static spark.Spark.*;
+import static spark.Spark.afterAfter;
 
 /**
  * Main application class. The environment is set up here, and all necessary services are run.
@@ -50,5 +52,7 @@ public class App {
     post("/call/connect", new CallController().connect);
     post("/ticket/create", new TicketController(ticketService).create,
         new MustacheTemplateEngine());
+
+    afterAfter(new LoggingFilter());
   }
 }
