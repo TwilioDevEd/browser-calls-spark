@@ -19,12 +19,15 @@ repositories {
 }
 
 dependencies {
-    compile 'com.sparkjava:spark-core:2.5'
+    compile('com.sparkjava:spark-core:2.5.5') {
+        exclude module: 'slf4j-simple'
+    }
     compile 'org.postgresql:postgresql:9.4.1210'
-    compile group: 'com.twilio.sdk', name: 'twilio', version: '7.0.0-rc-29'
+    compile group: 'com.twilio.sdk', name: 'twilio', version: '7.7.0'
     compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.0'
     compile 'com.sparkjava:spark-template-mustache:2.3'
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    compile 'ch.qos.logback:logback-classic:1.1.11'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile 'org.jdom:jdom:2.0.2'
