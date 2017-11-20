@@ -4,8 +4,10 @@ import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Class that holds methods to obtain configuration parameters from the environment.
@@ -13,7 +15,21 @@ import java.util.Map;
 public class AppSetup {
   private Map<String, String> env;
 
+  private Optional<String> dbUser;
+  private Optional<String> dbPass;
+  private Optional<String> dbConnectionUrl;
+
+  public AppSetup(String dbUser, String dbPass, String dbConnectionUrl) {
+    this.dbUser = Optional.of(dbUser);
+    this.dbPass = Optional.of(dbPass);
+    this.dbConnectionUrl = Optional.of(dbConnectionUrl);
+  }
+
   public AppSetup() {
+
+    dbUser = Optional.empty();
+    dbPass = Optional.empty();
+    dbConnectionUrl = Optional.empty();
     this.env = System.getenv();
   }
 
@@ -27,9 +43,12 @@ public class AppSetup {
     Map<String, String> configOverrides = new HashMap<>();
 
     try {
-      configOverrides.put("javax.persistence.jdbc.url", getDatabaseURL());
-      configOverrides.put("javax.persistence.jdbc.user", getDatabaseUsername());
-      configOverrides.put("javax.persistence.jdbc.password", getDatabasePassword());
+      String url = dbConnectionUrl.isPresent() ? dbConnectionUrl.get() : getDatabaseURL();
+      String user = dbUser.isPresent() ? dbUser.get() : getDatabaseUsername();
+      String password = dbPass.isPresent() ? dbPass.get() : getDatabasePassword();
+      configOverrides.put("javax.persistence.jdbc.url", url);
+      configOverrides.put("javax.persistence.jdbc.user", user);
+      configOverrides.put("javax.persistence.jdbc.password", password);
     } catch (UndefinedEnvironmentVariableException e) {
       e.printStackTrace();
     }
