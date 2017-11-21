@@ -1,8 +1,8 @@
 package com.twilio.browsercalls.lib;
 
+import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.jwt.client.ClientCapability;
 import com.twilio.jwt.client.IncomingClientScope;
@@ -52,7 +52,7 @@ public class CapabilityTokenGenerator {
     OutgoingClientScope outgoingScope = new OutgoingClientScope.Builder(appSid).build();
     IncomingClientScope incomingScope = new IncomingClientScope(role);
 
-    List<Scope> scopes = Lists.newArrayList(outgoingScope, incomingScope);
+    List<Scope> scopes = Arrays.asList(outgoingScope, incomingScope);
 
     String token = capabilityBuilder.scopes(scopes).build().toJwt();
 
