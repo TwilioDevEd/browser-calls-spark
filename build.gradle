@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    compile('com.sparkjava:spark-core:2.5.5') {
+    compile('com.sparkjava:spark-core:2.9.1') {
         exclude module: 'slf4j-simple'
     }
     compile 'org.postgresql:postgresql:9.4.1210'
