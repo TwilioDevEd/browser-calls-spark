@@ -24,7 +24,7 @@ dependencies {
     }
     compile 'org.postgresql:postgresql:9.4.1210'
     compile group: 'com.twilio.sdk', name: 'twilio', version: '7.7.0'
-    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.0'
+    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.4'
     compile 'com.sparkjava:spark-template-mustache:2.3'
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
     compile 'ch.qos.logback:logback-classic:1.1.11'
