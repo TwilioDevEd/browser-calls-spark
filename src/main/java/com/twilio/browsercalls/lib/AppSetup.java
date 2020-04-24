@@ -28,6 +28,8 @@ public class AppSetup {
 
     try {
       configOverrides.put("javax.persistence.jdbc.url", getDatabaseURL());
+      configOverrides.put("javax.persistence.jdbc.user", getDatabaseUsername());
+      configOverrides.put("javax.persistence.jdbc.password", getDatabasePassword());
     } catch (UndefinedEnvironmentVariableException e) {
       e.printStackTrace();
     }
@@ -41,8 +43,17 @@ public class AppSetup {
     return port != null ? Integer.parseInt(port) : 4567;
   }
 
+  public String getDatabasePassword() {
+    String password = env.get("DB_PASSWORD");
+    return password != null ? password : "";
+  }
+
   public String getDatabaseURL() throws UndefinedEnvironmentVariableException {
     return getEnvironmentVariable("DB_URL", "DB_URL is not defined");
+  }
+
+  public String getDatabaseUsername() throws UndefinedEnvironmentVariableException {
+    return getEnvironmentVariable("DB_USERNAME", "DB_USERNAME is not defined");
   }
 
   public String getAccountSid() throws UndefinedEnvironmentVariableException {
