@@ -4,3 +4,6 @@
 .env
 build/
 browser-calls-spark.iml
+.settings
+.project
+.vscode

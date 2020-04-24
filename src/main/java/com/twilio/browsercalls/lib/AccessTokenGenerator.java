@@ -4,35 +4,35 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
-import com.twilio.jwt.client.ClientCapability;
-import com.twilio.jwt.client.IncomingClientScope;
-import com.twilio.jwt.client.OutgoingClientScope;
-import com.twilio.jwt.client.Scope;
+
+// Token generation imports
+import com.twilio.jwt.accesstoken.AccessToken;
+import com.twilio.jwt.accesstoken.VoiceGrant;
 
 /**
  * Class that generates a Twilio capability token based on the page that is requesting it.
  */
-public class CapabilityTokenGenerator {
-  private ClientCapability.Builder capabilityBuilder;
+public class AccessTokenGenerator {
+  private AccessToken.Builder accessTokenBuilder;
   private AppSetup appSetup;
   private String role;
 
-  public CapabilityTokenGenerator(String role, ClientCapability.Builder capabilityBuilder,
+  public AccessTokenGenerator(String role, AccessToken.Builder accessTokenBuilder,
       AppSetup setup) {
     this.role = role;
     appSetup = setup;
-    this.capabilityBuilder = capabilityBuilder;
+    this.accessTokenBuilder = accessTokenBuilder;
   }
 
-  public CapabilityTokenGenerator(String role) {
+  public AccessTokenGenerator(String role) {
     this.role = role;
     appSetup = new AppSetup();
     try {
       /**
-       * To find TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN visit https://www.twilio.com/console
+       * To find TWILIO_ACCOUNT_SID visit https://www.twilio.com/console
        */
-      this.capabilityBuilder =
-          new ClientCapability.Builder(appSetup.getAccountSid(), appSetup.getAuthToken());
+      this.accessTokenBuilder =
+          new AccessToken.Builder(appSetup.getAccountSid(), appSetup.getApiKey(), appSetup.getApiSecret()).identity(this.role);
     } catch (UndefinedEnvironmentVariableException e) {
       e.getLocalizedMessage();
     }
@@ -49,13 +49,16 @@ public class CapabilityTokenGenerator {
     } catch (UndefinedEnvironmentVariableException e) {
       System.out.println(e.getLocalizedMessage());
     }
-    OutgoingClientScope outgoingScope = new OutgoingClientScope.Builder(appSid).build();
-    IncomingClientScope incomingScope = new IncomingClientScope(role);
 
-    List<Scope> scopes = Lists.newArrayList(outgoingScope, incomingScope);
-
-    String token = capabilityBuilder.scopes(scopes).build().toJwt();
-
+    // Create Voice grant
+    VoiceGrant grant = new VoiceGrant();
+    grant.setOutgoingApplicationSid(appSid);
+    
+    // Optional: add to allow incoming calls
+    grant.setIncomingAllow(true);
+    
+    String token = this.accessTokenBuilder.grant(grant).build().toJwt();
+    
     return token;
   }
 }

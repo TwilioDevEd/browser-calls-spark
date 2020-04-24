@@ -2,8 +2,11 @@ package com.twilio.browsercalls.controllers;
 
 import com.twilio.browsercalls.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.browsercalls.lib.AppSetup;
-import com.twilio.twiml.*;
-import com.twilio.twiml.Number;
+import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.TwiMLException;
+import com.twilio.twiml.voice.Client;
+import com.twilio.twiml.voice.Dial;
+import com.twilio.twiml.voice.Number;
 
 import spark.Request;
 import spark.Route;
