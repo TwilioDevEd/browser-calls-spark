@@ -7,3 +7,6 @@ browser-calls-spark.iml
 .settings
 .project
 .vscode
+.classpath
+database.sqlite
+bin/

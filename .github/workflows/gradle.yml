@@ -14,21 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -37,12 +22,14 @@ jobs:
         java-version: 11.0
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Run Migrations
+      run: ./gradlew flywayMigrate
+      env:
+        DB_URL: jdbc:sqlite:./database.sqlite
     - name: Test with Gradle
       run: ./gradlew test
       env:
-        DB_URL: jdbc:postgresql://localhost:5432/browser_calls
-        DB_USERNAME: postgres
-        DB_PASSWORD: postgres
+        DB_URL: jdbc:sqlite:./database.sqlite
         TWILIO_ACCOUNT_SID: ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         TWILIO_PHONE_NUMBER: +1XXXYYYZZZZ
         TWILIO_APPLICATION_SID: APXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

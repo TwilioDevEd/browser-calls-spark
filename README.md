@@ -30,23 +30,11 @@ If you don't have a Twilio phone number yet, you can purchase a new number in yo
    repository so, if you don't have Gradle installed on the system, you can use `./gradlew` to
    execute any gradle task.
 
-1. The application uses PostgreSQL as the persistence layer. If you
-   don't have it already, you should install it. The easiest way is by
-   using [Postgres.app](http://postgresapp.com/).
-
-1. Create a database.
-
-   ```bash
-   $ createdb browser_calls
-   ```
-
 1. Copy the sample configuration file and edit it to match your configuration.
 
     ```bash
     $ cp .env.example .env
     ```
-
-   You'll need to set `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD`.
 
    You can find your `TWILIO_ACCOUNT_SID` under your
    [Twilio Account Settings](https://www.twilio.com/user/account/settings). Set

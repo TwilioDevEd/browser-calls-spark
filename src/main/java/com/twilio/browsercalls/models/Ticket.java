@@ -7,7 +7,11 @@ import java.util.Date;
 @Table(name = "tickets")
 public class Ticket {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(generator="sqlite_ticket")
+  @TableGenerator(name="sqlite_ticket", table="sqlite_sequence",
+    pkColumnName="name", valueColumnName="seq",
+    pkColumnValue="tickets",
+    initialValue=1, allocationSize=1)
   @Column(name = "id")
   private Long id;
 
