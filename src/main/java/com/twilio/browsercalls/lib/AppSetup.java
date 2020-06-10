@@ -40,7 +40,7 @@ public class AppSetup {
   public int getPortNumber() {
     String port = env.get("PORT");
 
-    return port != null ? Integer.parseInt(port) : 4567;
+    return port != null ? Integer.parseInt(port) : 8080;
   }
 
   public String getDatabasePassword() {
