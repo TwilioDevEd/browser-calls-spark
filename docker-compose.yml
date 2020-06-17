@@ -1,17 +1,10 @@
 version: "3.6"
 services:
-  db:
-    image: postgres:9.6
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=sample
-      - POSTGRES_USER=sample
-      - POSTGRES_DB=browser_calls
   app:
     stdin_open: true
     tty: true
     environment:
+      - DB_URL=jdbc:sqlite:mydb.db
       - TWILIO_ACCOUNT_SID=ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       - TWILIO_PHONE_NUMBER=+1XXXYYYZZZZ
       - TWILIO_APPLICATION_SID=APXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -20,5 +13,3 @@ services:
     build: .
     ports: 
       - "8080:8080"
-    links:
-      - db

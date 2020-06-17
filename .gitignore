@@ -9,3 +9,4 @@ browser-calls-spark.iml
 .vscode
 bin/
 .classpath
+*.db

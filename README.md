@@ -31,7 +31,6 @@ Implementations in other languages:
 ### Requirements
 
 - [Java Development Kit](https://adoptopenjdk.net/) version 11 or later.
-- [PostgreSQL](https://www.postgresql.org/)
 - [ngrok](https://ngrok.com)
 - A Twilio account - [sign up](https://www.twilio.com/try-twilio)
 
@@ -74,35 +73,29 @@ After the above requirements have been met:
 
     _If you are using a different operating system, make sure that all the variables from the `.env` file are loaded into your environment._
 
-3. Create a database.
+3. Run the migrations:
 
    ```bash
-   createdb browser_calls
+   ./gradlew flywayMigrate
    ```
 
-4. Run the migrations:
-
-   ```bash
-   $ ./gradlew flywayMigrate
-   ```
-
-5. Run the application
+4. Run the application
 
     ```bash
     make serve
     ```
     **NOTE:** If you are using a dedicated Java IDE like Eclipse or IntelliJ, you can start the application within the IDE and it will start in development mode, which means any changes on a source file will be automatically reloaded.
 
-6. Expose the application to the wider Internet. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html).
+5. Expose the application to the wider Internet. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html).
 
    ```bash
    ngrok http 8080 -host-header="localhost:8080"
    ```
 
-   Once you have started ngrok, update your TwiML app's voice URL setting to use your ngrok hostname, so it will look something like this:
+   Once you have started ngrok, update your update your [TwiML app's](#create-a-twiml-app) voice URL setting to use your ngrok hostname, so it will look something like this:
 
    ```
-   http://<your-ngrok-subdomain>.ngrok.io/voice
+   http://<your-ngrok-subdomain>.ngrok.io/call/connect
    ```
 
 That's it!
