@@ -1,6 +1,6 @@
 package com.twilio.browsercalls.controllers;
 
-import com.twilio.browsercalls.lib.CapabilityTokenGenerator;
+import com.twilio.browsercalls.lib.AccessTokenGenerator;
 import org.json.simple.JSONObject;
 import spark.Route;
 import spark.Request;
@@ -19,7 +19,7 @@ public class TokenController {
      */
     String page = request.queryParams("page");
     String role = page.equals("/dashboard") ? "support_agent" : "customer";
-    CapabilityTokenGenerator generator = new CapabilityTokenGenerator(role);
+    AccessTokenGenerator generator = new AccessTokenGenerator(role);
     String token = generator.generate();
 
     JSONObject obj = new JSONObject();

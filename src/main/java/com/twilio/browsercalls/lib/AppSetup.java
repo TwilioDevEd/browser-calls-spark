@@ -40,7 +40,7 @@ public class AppSetup {
   public int getPortNumber() {
     String port = env.get("PORT");
 
-    return port != null ? Integer.parseInt(port) : 4567;
+    return port != null ? Integer.parseInt(port) : 8080;
   }
 
   public String getDatabasePassword() {
@@ -53,24 +53,29 @@ public class AppSetup {
   }
 
   public String getDatabaseUsername() throws UndefinedEnvironmentVariableException {
-    return getEnvironmentVariable("DB_USERNAME", "DB_USERNAME is not defined");
+    String username = env.get("DB_USERNAME");
+    return username != null ? username : "";
   }
 
   public String getAccountSid() throws UndefinedEnvironmentVariableException {
     return getEnvironmentVariable("TWILIO_ACCOUNT_SID", "TWILIO_ACCOUNT_SID is not defined");
   }
-
-  public String getAuthToken() throws UndefinedEnvironmentVariableException {
-    return getEnvironmentVariable("TWILIO_AUTH_TOKEN", "TWILIO_AUTH_TOKEN is not set");
-  }
-
+  
   public String getTwilioPhoneNumber() throws UndefinedEnvironmentVariableException {
     return getEnvironmentVariable("TWILIO_PHONE_NUMBER", "TWILIO_PHONE_NUMBER is not set");
   }
-
+  
   public String getApplicationSid() throws UndefinedEnvironmentVariableException {
     return getEnvironmentVariable("TWILIO_APPLICATION_SID",
-                          "TWILIO_APPLICATION_SID is not set");
+    "TWILIO_APPLICATION_SID is not set");
+  }
+  
+  public String getApiKey() throws UndefinedEnvironmentVariableException {
+    return getEnvironmentVariable("API_KEY", "API_KEY is not set");
+  }
+  
+  public String getApiSecret() throws UndefinedEnvironmentVariableException {
+    return getEnvironmentVariable("API_SECRET", "API_SECRET is not set");
   }
 
   private String getEnvironmentVariable(String twilio_account_sid, String message) throws UndefinedEnvironmentVariableException {

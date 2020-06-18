@@ -1,7 +1,12 @@
+
+DROP TABLE IF EXISTS tickets;
+
 create table tickets (
-  id SERIAL UNIQUE not null PRIMARY KEY,
-  name varchar(100) not null,
-  phone_number varchar(15) not null,
-  description text not null,
-  date timestamp not null
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT not null,
+  phone_number TEXT not null,
+  description TEXT not null,
+  date DATETIME not null
 );
+
+INSERT INTO sqlite_sequence (name, seq) VALUES ("tableSeq", 1);
