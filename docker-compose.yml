@@ -4,7 +4,7 @@ services:
     stdin_open: true
     tty: true
     environment:
-      - DB_URL=jdbc:sqlite:mydb.db
+      - DB_URL=jdbc:sqlite:/tmp/mydb.db
       - TWILIO_ACCOUNT_SID=ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       - TWILIO_PHONE_NUMBER=+1XXXYYYZZZZ
       - TWILIO_APPLICATION_SID=APXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
