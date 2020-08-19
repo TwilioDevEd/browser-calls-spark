@@ -28,7 +28,7 @@ dependencies {
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     implementation group:'org.xerial', name:'sqlite-jdbc', version:'3.30.1'
     testImplementation group: 'junit', name: 'junit', version: '4.13'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.5.2'
     testImplementation group: 'org.jdom', name: 'jdom', version: '2.0.2'
 }
 
